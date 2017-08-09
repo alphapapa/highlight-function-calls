@@ -40,6 +40,8 @@ Run =highlight-function-calls-mode= to activate.  Maybe you want to add it to yo
     (add-hook 'emacs-lisp-mode-hook 'highlight-function-calls-mode))
 #+END_SRC
 
+*Note*: You should probably activate this mode last, after any other highlighting modes, such as =rainbow-identifiers-mode=, otherwise the =highlight-function-calls= faces may not be visible.  You might need to use a custom function to activate modes like this in the right order, and add that function to your =emacs-lisp-mode-hook= instead.
+
 ** Tips
 
 You can customize options and faces in the =highlight-function-calls= customization group.
