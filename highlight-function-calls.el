@@ -22,7 +22,8 @@
 ;;; Code:
 
 (defgroup highlight-function-calls nil
-  "Options for highlighting function/macro calls and special forms.")
+  "Options for highlighting function/macro calls and special forms."
+  :group 'faces)
 
 (defface highlight-function-calls--face
   '((t (:underline t)))
@@ -118,7 +119,7 @@
             (setq highlight-function-calls--face-name
                   (pcase match
                     ((and 'not (guard highlight-function-calls-not)) 'highlight-function-calls--not-face)
-                    (otherwise 'highlight-function-calls--face)))
+                    (_ 'highlight-function-calls--face)))
             (throw 'highlight-function-calls--matcher t)))))
     nil))
 
