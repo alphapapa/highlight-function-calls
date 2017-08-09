@@ -1,0 +1,45 @@
+#+BEGIN_HTML
+<a href=https://alphapapa.github.io/dont-tread-on-emacs/><img src="dont-tread-on-emacs-150.png" align="right"></a>
+#+END_HTML
+
+* highlight-function-calls
+
+[[https://melpa.org/#/highlight-function-calls][file:https://melpa.org/packages/highlight-function-calls-badge.svg]]
+
+This package highlights function symbols in function calls.  This makes them stand out from other symbols, which makes it easy to see where calls to other functions are.  Optionally, macros and special forms can be highlighted as well.  Also, a list of symbols can be excluded from highlighting; by default, ones like =+= / =-=, =<= / =>=, =error=, =require=, etc. are excluded.  Finally, the =not= function can be highlighted specially.
+
+** Screenshots
+
+Here's a plain Emacs configuration:
+
+[[screenshots/plain.png]]
+
+Here's one with some other highlighting modes, like =rainbow-delimiters= and =rainbow-identifiers=:
+
+[[screenshots/rainbow.png]]
+
+** Installation
+
+Install the package from MELPA and you're all set!
+
+If you want to install it manually, put =highlight-function-calls.el= in your =load-path=, then add this to your init file:
+
+#+BEGIN_SRC elisp
+  (require 'highlight-function-calls)
+#+END_SRC
+
+** Usage
+
+Run =highlight-function-calls-mode= to activate.
+
+** Tips
+
+You can customize options and faces in the =highlight-function-calls= customization group.
+
+** Contributions
+
+Bug reports, feature requests, pull requests, /oh my/!
+
+** License
+
+GPLv3
