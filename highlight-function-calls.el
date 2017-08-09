@@ -4,7 +4,7 @@
 ;; Url: http://github.com/alphapapa/highlight-function-calls
 ;; Version: 0.1-pre
 ;; Package-Requires: ((emacs "24.4"))
-;; Keywords: highlighting
+;; Keywords: faces, highlighting
 
 ;;; Commentary:
 
