@@ -32,7 +32,13 @@ If you want to install it manually, put =highlight-function-calls.el= in your =l
 
 ** Usage
 
-Run =highlight-function-calls-mode= to activate.
+Run =highlight-function-calls-mode= to activate.  Maybe you want to add it to your =emacs-lisp-mode-hook= like this:
+
+#+BEGIN_SRC elisp
+  (use-package highlight-function-calls
+    :config
+    (add-hook 'emacs-lisp-mode-hook 'highlight-function-calls-mode))
+#+END_SRC
 
 ** Tips
 

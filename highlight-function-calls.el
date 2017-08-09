@@ -16,6 +16,9 @@
 ;; require, etc. are excluded.  Finally, the `not' function can be
 ;; highlighted specially.
 
+;; Just run `highlight-function-calls-mode' to activate, or you can
+;; add that to your `emacs-lisp-mode-hook' to do it automatically.
+
 ;;; Code:
 
 (defgroup highlight-function-calls nil
