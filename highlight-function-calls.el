@@ -73,6 +73,9 @@
      ;; lists. I don't know if we can fix this, because `syntax-ppss'
      ;; doesn't give any information about this.  It might require
      ;; using semantic, which we probably don't want to mess with.
+
+     ;; FIXME: It also doesn't avoid matching, e.g. the `map' in "(let
+     ;; ((map".  I'm not sure why.
      "\\(?:^\\|[[:space:]]+\\)("  ; (rx (or bol (1+ space)) "(")
 
      ;; NOTE: The (0 nil) is required, although I don't understand
