@@ -121,7 +121,7 @@
             (goto-char (match-end 0))
             (setq highlight-function-calls--face-name
                   (pcase match
-                    ((and 'not (guard highlight-function-calls-not)) 'highlight-function-calls--not-face)
+                    ((and (or 'not 'null) (guard highlight-function-calls-not)) 'highlight-function-calls--not-face)
                     (_ 'highlight-function-calls--face)))
             (throw 'highlight-function-calls--matcher t)))))
     nil))
