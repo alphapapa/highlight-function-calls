@@ -46,8 +46,10 @@
     >
     <=
     >=
+    debug  ; Not intended as an interactive function
     error
     require
+    signal
     throw
     user-error
     )
