@@ -31,7 +31,7 @@
   :group 'highlight-function-calls)
 
 (defface highlight-function-calls--not-face
-  '((t (:weight bold :foreground "red")))
+  '((t (:inherit warning)))
   "Face for highlighting `not'."
   :group 'highlight-function-calls)
 
