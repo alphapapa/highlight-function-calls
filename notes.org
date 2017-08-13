@@ -1,0 +1,14 @@
+* Ideas
+** Function-oriented approach
+
+Steve Purcell suggested an approach like this:
+
+#+BEGIN_QUOTE
+By "default mapping" I mean that if you have a defcustom list of functions which each take a symbol name and return a face symbol or nil, then your code would call those in turn for each symbol until it got a face symbol. See run-hook-with-args-until-success for this. And then your current code would reduce to a function which returns a specific face for not, and another function which returns a face for other non-suppressed function names, so there'd be a "default mapping" containing just those two functions.
+
+There's nothing magical about the not case, in that sense.
+
+In any case, I'll merge this now, but I definitely encourage you to have a play with the above idea! :-)
+
+(See also the cl-lib-highlight package, btw.)
+#+END_QUOTE
