@@ -62,7 +62,7 @@
 (defcustom highlight-function-calls-special-forms nil
   "Whether to highlight special-forms calls.")
 
-(defcustom highlight-function-calls-not t
+(defcustom highlight-function-calls-not nil
   "Whether to highlight `not'.")
 
 (defconst highlight-function-calls--keywords
