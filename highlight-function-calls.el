@@ -25,7 +25,7 @@
   "Options for highlighting function/macro calls and special forms."
   :group 'faces)
 
-(defface highlight-function-calls--face
+(defface highlight-function-calls-face
   '((t (:underline t)))
   "Face for highlighting function calls."
   :group 'highlight-function-calls)
@@ -93,7 +93,7 @@
      ;; line, but we must not move the point in the process.  We do
      ;; not use a POST-MATCH-FORM.  Then we use the MATCH-HIGHLIGHT
      ;; form to highlight group 0, which is the whole symbol, we apply
-     ;; the `highlight-function-calls--face' face, and we `prepend' it so
+     ;; the `highlight-function-calls-face' face, and we `prepend' it so
      ;; that it overrides existing faces; this way we even work with,
      ;; e.g. `rainbow-identifiers-mode', but only if we're activated
      ;; last.
@@ -124,7 +124,7 @@
             (setq highlight-function-calls--face-name
                   (pcase match
                     ((and (or 'not 'null) (guard highlight-function-calls-not)) 'highlight-function-calls--not-face)
-                    (_ 'highlight-function-calls--face)))
+                    (_ 'highlight-function-calls-face)))
             (throw 'highlight-function-calls--matcher t)))))
     nil))
 
