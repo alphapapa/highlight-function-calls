@@ -57,13 +57,16 @@
   :type '(repeat symbol))
 
 (defcustom highlight-function-calls-macro-calls nil
-  "Whether to highlight macro calls.")
+  "Whether to highlight macro calls."
+  :type 'boolean)
 
 (defcustom highlight-function-calls-special-forms nil
-  "Whether to highlight special-forms calls.")
+  "Whether to highlight special-forms calls."
+  :type 'boolean)
 
 (defcustom highlight-function-calls-not nil
-  "Whether to highlight `not'.")
+  "Whether to highlight `not'."
+  :type 'boolean)
 
 (defconst highlight-function-calls--keywords
   '((
