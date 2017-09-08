@@ -63,6 +63,7 @@
     >=
     debug  ; Not intended as an interactive function
     error
+    provide
     require
     signal
     throw
