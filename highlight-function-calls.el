@@ -97,7 +97,7 @@
 
      ;; FIXME: It also doesn't avoid matching, e.g. the `map' in "(let
      ;; ((map".  I'm not sure why.
-     "\\(?:^\\|[[:space:]]+\\)("  ; (rx (or bol (1+ space)) "(")
+     "\\(?:^\\|[[:space:]]+\\|,\\)("  ; (rx (or bol (1+ space) ",") "(")
 
      ;; NOTE: The (0 nil) is required, although I don't understand
      ;; exactly why.  This was confusing enough, following the
