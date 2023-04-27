@@ -130,7 +130,7 @@
   "The matcher function to be used by font lock mode."
   (setq end (save-excursion (forward-symbol 1) (point)))
   (catch 'highlight-function-calls--matcher
-    (when (not (nth 5 (syntax-ppss)))
+    (when (and (not (nth 4 (syntax-ppss))) (not (nth 5 (syntax-ppss))))
       (while (re-search-forward (rx symbol-start (*? any) symbol-end) end t)
         (let ((match (intern-soft (match-string 0))))
           (when (and (or (functionp match)
