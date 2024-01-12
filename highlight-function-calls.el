@@ -2,7 +2,7 @@
 
 ;; Author: Adam Porter <adam@alphapapa.net>
 ;; Url: http://github.com/alphapapa/highlight-function-calls
-;; Version: 0.1
+;; Version: 0.2-pre
 ;; Package-Requires: ((emacs "24.4"))
 ;; Keywords: faces, highlighting
 
