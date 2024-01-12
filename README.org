@@ -56,9 +56,9 @@ You can customize options and faces in the =highlight-function-calls= customizat
 
 * Changelog
 
-** v0.1-pre
+** v0.1
 
-Not yet tagged.
+First tagged release (after several years of no changes).
 
 * Contributions
 
