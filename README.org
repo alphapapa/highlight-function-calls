@@ -1,4 +1,4 @@
-* highlight-function-calls
+#+TITLE: highlight-function-calls
 
 [[https://melpa.org/#/highlight-function-calls][file:https://melpa.org/packages/highlight-function-calls-badge.svg]]
 
@@ -18,7 +18,7 @@ Since Elisp is a Lisp-2, a symbol can be a variable or a function, and regular e
 
 The default face just underlines the function name, but you can customize the face however you like.
 
-** Screenshots
+* Screenshots
 
 Here's a plain Emacs configuration:
 
@@ -28,7 +28,7 @@ Here's one with some other highlighting modes, like =rainbow-delimiters= and =ra
 
 [[screenshots/rainbow.png]]
 
-** Installation
+* Installation
 
 Install the package from MELPA and you're all set!
 
@@ -38,7 +38,7 @@ If you want to install it manually, put =highlight-function-calls.el= in your =l
   (require 'highlight-function-calls)
 #+END_SRC
 
-** Usage
+* Usage
 
 Run =highlight-function-calls-mode= to activate.  Maybe you want to add it to your =emacs-lisp-mode-hook= like this:
 
@@ -50,14 +50,20 @@ Run =highlight-function-calls-mode= to activate.  Maybe you want to add it to yo
 
 *Note*: You should probably activate this mode last, after any other highlighting modes, such as =rainbow-identifiers-mode=, otherwise the =highlight-function-calls= faces may not be visible.  You might need to use a custom function to activate modes like this in the right order, and add that function to your =emacs-lisp-mode-hook= instead.
 
-** Tips
+* Tips
 
 You can customize options and faces in the =highlight-function-calls= customization group.
 
-** Contributions
+* Changelog
+
+** v0.1-pre
+
+Not yet tagged.
+
+* Contributions
 
 Bug reports, feature requests, pull requests, /oh my/!
 
-** License
+* License
 
 GPLv3
