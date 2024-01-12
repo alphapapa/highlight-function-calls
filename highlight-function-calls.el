@@ -122,7 +122,19 @@
         (forward-symbol 1)
         (point))
       nil
-      (0 highlight-function-calls--face-name prepend))))
+      (0 highlight-function-calls--face-name prepend)))
+    (;; (MATCHER . ANCHORED-HIGHLIGHTER):
+     ;; MATCHER
+     ,(rx "#'" symbol-start (1+ (not blank)) symbol-end)
+     ;; ANCHORED-HIGHLIGHTER:
+     ;; FUNCTION
+     highlight-function-calls--matcher
+     ;; PRE-FORM
+     (forward-symbol -1)
+     ;; POST-FORM
+     nil
+     ;; SUBEXP-HIGHLIGHTER
+     (0 highlight-function-calls--face-name prepend)))
   "Keywords argument for `font-lock-add-keywords'.")
 
 (defvar highlight-function-calls--face-name nil)

@@ -58,7 +58,9 @@ You can customize options and faces in the =highlight-function-calls= customizat
 
 ** v0.2-pre
 
-Nothing new yet.
+*Additions*
+
++ Sharp-quoted function symbols are highlighted.
 
 ** v0.1
 
