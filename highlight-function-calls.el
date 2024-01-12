@@ -85,7 +85,7 @@
   :type 'boolean)
 
 (defconst highlight-function-calls--keywords
-  '((
+  `((
      ;; First we match an opening paren, which prevents matching
      ;; function names as arguments.  We also avoid matching opening
      ;; parens immediately after quotes.
@@ -97,11 +97,12 @@
 
      ;; FIXME: It also doesn't avoid matching, e.g. the `map' in "(let
      ;; ((map".  I'm not sure why.
-     "\\(?:^\\|[[:space:]]+\\|,\\)("  ; (rx (or bol (1+ space) ",") "(")
+     ,(rx (or bol (one-or-more space) ",") "(")
 
      ;; NOTE: The (0 nil) is required, although I don't understand
      ;; exactly why.  This was confusing enough, following the
      ;; docstring for `font-lock-add-keywords'.
+     ;; FIXME: This doesn't seem valid.
      (0 nil)
 
      ;; Now we use a HIGHLIGHT MATCH-ANCHORED form to match the symbol
