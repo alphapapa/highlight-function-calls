@@ -1,3 +1,10 @@
+* Tasks
+** TODO Add note about ~rainbow-identifiers-faces-to-override~
+
+~highlight-function-calls-face~ should be added to it for users who use it.
+
+Also, I should remove the =-face= from the name of that face.
+
 * Ideas
 ** Function-oriented approach
 
