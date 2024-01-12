@@ -129,7 +129,6 @@
 
 (defun highlight-function-calls--matcher (end)
   "The matcher function to be used by font lock mode."
-  (setq end (save-excursion (forward-symbol 1) (point)))
   (catch 'highlight-function-calls--matcher
     (when (not (nth 5 (syntax-ppss)))
       (while (re-search-forward (rx symbol-start (*? any) symbol-end) end t)
