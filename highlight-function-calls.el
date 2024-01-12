@@ -51,24 +51,9 @@
   :group 'highlight-function-calls)
 
 (defcustom highlight-function-calls-exclude-symbols
-  '(
-    =
-    +
-    -
-    /
-    *
-    <
-    >
-    <=
-    >=
-    debug  ; Not intended as an interactive function
-    error
-    provide
-    require
-    signal
-    throw
-    user-error
-    )
+  '( = + - / * < > <= >=
+     debug  ; Not intended as an interactive function
+     error provide require signal throw user-error)
   "List of symbols to not highlight."
   :type '(repeat symbol))
 
@@ -140,7 +125,8 @@
 (defvar highlight-function-calls--face-name nil)
 
 (defun highlight-function-calls--matcher (end)
-  "The matcher function to be used by font lock mode."
+  "Match function symbols up to END.
+The match function to be used by font lock mode."
   (catch 'highlight-function-calls--matcher
     (when (not (nth 5 (syntax-ppss)))
       (while (re-search-forward (rx symbol-start (*? any) symbol-end) end t)
@@ -166,8 +152,8 @@
 Toggle highlighting of function calls on or off.
 
 With a prefix argument ARG, enable if ARG is positive, and
-disable it otherwise. If called from Lisp, enable the mode if ARG
-is omitted or nil, and toggle it if ARG is `toggle'."
+disable it otherwise.  If called from Lisp, enable the mode if
+ARG is omitted or nil, and toggle it if ARG is `toggle'."
   :init-value nil :lighter nil :keymap nil
   (let ((keywords highlight-function-calls--keywords))
     (font-lock-remove-keywords nil keywords)
