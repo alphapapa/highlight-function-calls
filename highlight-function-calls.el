@@ -70,59 +70,74 @@
   :type 'boolean)
 
 (defconst highlight-function-calls--keywords
-  `((;; (MATCHER . ANCHORED-HIGHLIGHTER):
+  `((
+     ;; First we match an opening paren (which prevents matching
+     ;; function names as arguments) or a function-quote (in which
+     ;; case an argument should be matched).  We also avoid matching
+     ;; opening parens immediately after quotes (but this is not
+     ;; perfect, since a list within a list could have its second
+     ;; opening paren on a line by itself, in which case it would
+     ;; appear to us like a normal function call and get
+     ;; highlighted--but trying to fix that doesn't seem worth the
+     ;; trouble, given how much trouble all this has already been).
 
-     ;; MATCHER
-     ;; First we match an opening paren, which prevents matching
-     ;; function names as arguments.  We also avoid matching opening
-     ;; parens immediately after quotes (but we can't do the same for
-     ;; deeper levels).
-     ,(rx (or bol (one-or-more space) ",") "("
-          (group symbol-start (1+ (not blank)) symbol-end))
+     ;; FIXME: This does not avoid matching opening parens in quoted
+     ;; lists. I don't know if we can fix this, because `syntax-ppss'
+     ;; doesn't give any information about this.  It might require
+     ;; using semantic, which we probably don't want to mess with.
 
-     (;; ANCHORED-HIGHLIGHTER:
-      ;; FUNCTION
-      highlight-function-calls--matcher
-      ;; PRE-FORM
+     ;; FIXME: It also doesn't avoid matching, e.g. the `map' in "(let
+     ;; ((map".  I'm not sure why.
+     ,(rx (or bol (one-or-more space) ",")
+	  (or "(" "#'"))
+
+     ;; NOTE: The (0 nil) is required, although I don't understand
+     ;; exactly why.  This was confusing enough, following the
+     ;; docstring for `font-lock-add-keywords'.
+     ;; FIXME: This doesn't seem valid.
+     (0 nil)
+
+     ;; Now we use a HIGHLIGHT MATCH-ANCHORED form to match the symbol
+     ;; after the paren.  We call the `highlight-function-calls--matcher'
+     ;; function to test whether the face should be applied.  We use a
+     ;; PRE-MATCH-FORM to return a position at the end of the symbol,
+     ;; which prevents matching function name symbols later on the
+     ;; line, but we must not move the point in the process.  We do
+     ;; not use a POST-MATCH-FORM.  Then we use the MATCH-HIGHLIGHT
+     ;; form to highlight group 0, which is the whole symbol, we apply
+     ;; the `highlight-function-calls-face' face, and we `prepend' it so
+     ;; that it overrides existing faces; this way we even work with,
+     ;; e.g. `rainbow-identifiers-mode', but only if we're activated
+     ;; last.
+     (highlight-function-calls--matcher
+      (save-excursion
+        (forward-symbol 1)
+        (point))
       nil
-      ;; POST-FORM
-      nil
-      ;; SUBEXP-HIGHLIGHTER
-      (1 highlight-function-calls--face-name prepend)))
-    (;; (MATCHER . ANCHORED-HIGHLIGHTER):
-     ;; MATCHER
-     ,(rx "#'" symbol-start (group (1+ (not blank))) symbol-end)
-     ;; ANCHORED-HIGHLIGHTER:
-     ;; FUNCTION
-     highlight-function-calls--matcher
-     ;; PRE-FORM
-     nil
-     ;; POST-FORM
-     nil
-     ;; SUBEXP-HIGHLIGHTER
-     (0 highlight-function-calls--face-name prepend)))
+      (0 highlight-function-calls--face-name prepend))))
   "Keywords argument for `font-lock-add-keywords'.")
 
 (defvar highlight-function-calls--face-name nil)
 
 (defun highlight-function-calls--matcher (end)
   "Match function symbols up to END.
-The match function to be used by font lock mode."
+The matcher function to be used by font lock mode."
   (catch 'highlight-function-calls--matcher
     (when (not (nth 5 (syntax-ppss)))
-      (let ((match (intern-soft (match-string 1))))
-        (when (and (or (functionp match)
-                       (when highlight-function-calls-macro-calls
-                         (macrop match))
-                       (when highlight-function-calls-special-forms
-                         (special-form-p match)))
-                   (not (member match highlight-function-calls-exclude-symbols)))
-          (setq highlight-function-calls--face-name
-                (pcase match
-                  ((and (or 'not 'null) (guard highlight-function-calls-not)) 'highlight-function-calls--not-face)
-                  (_ 'highlight-function-calls-face)))
-          (goto-char end)
-          (throw 'highlight-function-calls--matcher t))))
+      (while (re-search-forward (rx symbol-start (*? any) symbol-end) end t)
+        (let ((match (intern-soft (match-string 0))))
+          (when (and (or (functionp match)
+                         (when highlight-function-calls-macro-calls
+                           (macrop match))
+                         (when highlight-function-calls-special-forms
+                           (special-form-p match)))
+                     (not (member match highlight-function-calls-exclude-symbols)))
+            (goto-char (match-end 0))
+            (setq highlight-function-calls--face-name
+                  (pcase match
+                    ((and (or 'not 'null) (guard highlight-function-calls-not)) 'highlight-function-calls--not-face)
+                    (_ 'highlight-function-calls-face)))
+            (throw 'highlight-function-calls--matcher t)))))
     nil))
 
 ;;;###autoload
